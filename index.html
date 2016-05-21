@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="angular.js"></script>
+<script src="app.js"></script>
+<title>Angular Study</title>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myCtrl"
+		ng-init="somebody='Tom';color='red';quantity=5;cost=6;person={name:'Jack',age:50};points=[1,2,3];languages=[{name:'Java',star:5},{name:'JS',star:4},{name:'VB',star:1}]">
+		<p>
+			First Name:<input type="text" ng-model="firstName">
+		</p>
+		<p>
+			Last Name:<input type="text" ng-model="lastName">
+		</p>
+		<h1>Hello {{firstName + " " + lastName}}</h1>
+		<p ng-bind="somebody"></p>
+		<p>
+			First name is <span ng-bind="firstName"></span>
+		</p>
+		<p>My expression is {{5+5}}</p>
+		<p>
+			<input type="text" style="background:{{color}}" ng-model="color" value="{{color}}">
+		</p>
+		<p>
+			Total is {{quantity * cost}}, <span ng-bind="quantity * cost"></span>
+		</p>
+		<p>Some person name is {{person.name}}, age is {{person.age}}.</p>
+		<p>There is some points {{points}}, first point is <span ng-bind="points[0]"></span></p>
+		
+		<!-- directive: test-directive -->
+		<ul>
+			<li ng-repeat="x in points">{{x}}</li>
+		</ul>
+		<ul>
+			<li ng-repeat="x in languages">language:{{x.name}}, star:{{x.star}}</li>
+		</ul>
+	</div>
+</body>
+</html>
