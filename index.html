@@ -2,13 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="angular.js"></script>
-<script src="app.js"></script>
+<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
 <title>Angular Study</title>
 </head>
-<body>
-	<div ng-app="myApp" ng-controller="myCtrl"
-		ng-init="somebody='Tom';color='red';quantity=5;cost=6;person={name:'Jack',age:50};points=[1,2,3];languages=[{name:'Java',star:5},{name:'JS',star:4},{name:'VB',star:1}]">
+<body ng-app="myApp">
+	<p>rootScope.color: {{color}}</p>
+	<p ng-controller="smallCtrl">scope.color: {{color}}</p>
+	<p>rootScope.color: {{color}}</p>
+	
+	<div ng-controller="myCtrl"
+		ng-init="somebody='Tom';color='red';quantity=5;cost=6;person={name:'Jack',age:50};points=[1,2,3];">
+		<h1 ng-click="changeNum()">Number is :{{number}}</h1>
+		
+		<form name="myForm">
+			Email:<input type="email" name="myAddress" ng-model="address" required>
+			<span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address!!</span>
+			<p>
+				Status:valid:{{myForm.myAddress.$valid}},dirty:{{myForm.myAddress.$dirty}},touched:{{myForm.myAddress.$touched}}.
+			</p>
+		</form>
+		<form class="css-form">
+			Enter your name:<input name="name" ng-model="name" required>
+		</form>
+		
 		<p>
 			First Name:<input type="text" ng-model="firstName">
 		</p>
@@ -25,7 +43,7 @@
 			<input type="text" style="background:{{color}}" ng-model="color" value="{{color}}">
 		</p>
 		<p>
-			Total is {{quantity * cost}}, <span ng-bind="quantity * cost"></span>
+			Total is {{quantity * cost | currency}}, <span ng-bind="quantity * cost"></span>
 		</p>
 		<p>Some person name is {{person.name}}, age is {{person.age}}.</p>
 		<p>There is some points {{points}}, first point is <span ng-bind="points[0]"></span></p>
@@ -34,9 +52,12 @@
 		<ul>
 			<li ng-repeat="x in points">{{x}}</li>
 		</ul>
-		<ul>
-			<li ng-repeat="x in languages">language:{{x.name}}, star:{{x.star}}</li>
+		Filter the languages:<input ng-model="langFlt" />
+		<ul ng-controller="langCtrl">
+			<li ng-repeat="x in languages | filter : langFlt">{{x | myLangFlt}}</li>
 		</ul>
 	</div>
+	
+	<script type="text/javascript" src="lang.ctrl.js"></script>
 </body>
 </html>

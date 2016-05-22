@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+.css-form input.ng-invalid {
+	background-color: red;
+}
