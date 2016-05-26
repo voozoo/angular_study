@@ -8,6 +8,35 @@
 <title>Angular Study</title>
 </head>
 <body ng-app="myApp">
+	<div ng-controller="optCtrl">
+		<select ng-model="selFooNames" ng-options="x for x in fooNames"></select>SELECTED:{{selFooNames}}
+	</div>
+	
+	<div ng-controller="httpCtrl">
+		<ul>
+			<li ng-repeat="x in customers">{{x.Name + "," + x.Country}}</li>
+		</ul>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>City</th>
+				<th>Country</th>
+			</tr>
+			<tr ng-repeat="x in customers">
+				<td>{{x.Name}}</td>
+				<td>{{x.City}}</td>
+				<td>{{x.Country}}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div ng-controller="srvCtl">
+		<p>ABS URL:{{absURL}}</p>
+		<textarea ng-model="resHTML" cols="40" rows="5"></textarea>STATUS CODE:{{resStatus}},STATUS TEXT:{{resText}}
+		<p>NOW:{{thisTime}}</p>
+		<p>output in HEX format is:{{hexOut}}</p>
+	</div>
+	
 	<p>rootScope.color: {{color}}</p>
 	<p ng-controller="smallCtrl">scope.color: {{color}}</p>
 	<p>rootScope.color: {{color}}</p>
