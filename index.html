@@ -8,8 +8,50 @@
 <title>Angular Study</title>
 </head>
 <body ng-app="myApp">
+	<div ng-controller="validationCtrl">
+		<form name="vForm">
+			<input name="vMailInput" ng-model="vMailInput" type="email" />
+			<input name="vNumInput" ng-model="vNumInput" type="number" />
+			<input type="submit" value="Submit" />
+		</form>
+		<p>
+			<h4>Mail & Number input status:</h4>
+			$untouched : {{vForm.vMailInput.$untouched}} , {{vForm.vNumInput.$untouched}}<br/>
+			$touched : {{vForm.vMailInput.$touched}} , {{vForm.vNumInput.$touched}}<br/>
+			$pristine : {{vForm.vMailInput.$pristine}} , {{vForm.vNumInput.$pristine}}<br/>
+			$dirty : {{vForm.vMailInput.$dirty}} , {{vForm.vNumInput.$dirty}}<br/>
+			$invalid : {{vForm.vMailInput.$invalid}} , {{vForm.vNumInput.$invalid}}<br/>
+			$valid : {{vForm.vMailInput.$valid}} , {{vForm.vNumInput.$valid}}<br/>
+		</p>
+		<p>
+			<h4>Form status:</h4>
+			$pristine : {{vForm.$pristine}}<br/>
+			$dirty : {{vForm.$dirty}}<br/>
+			$invalid : {{vForm.$invalid}}<br/>
+			$valid : {{vForm.$valid}}<br/>
+			$submitted : {{vForm.$submitted}}<br/>
+		</p>
+	</div>
+	
+	<div ng-controller="eventCtrl">
+		<p ng-mousemove="mousemoveCount = mousemoveCount + 1">MOUSE MOVE EVENT</p>
+		<p ng-bind="mousemoveCount"></p>
+		<p ng-click="myClickEvent($event)">CLICK ME.X={{coord.x}},Y={{coord.y}}.</p>
+	</div>
+	
 	<div ng-controller="optCtrl">
 		<select ng-model="selFooNames" ng-options="x for x in fooNames"></select>SELECTED:{{selFooNames}}
+		<select ng-model="selFooNamesUseRep">
+			<option ng-repeat="x in fooNames">{{x}}</option>
+		</select>
+		SELECTED:{{selFooNamesUseRep}}
+		<select ng-model="selCar" ng-options="x.model for x in cars"></select>SELECTED:{{selCar.model + " " + selCar.color}}
+		<select ng-model="selCarUseRep">
+			<option ng-repeat="x in cars" value="{{x.model}}">{{x.model}}</option>
+		</select>
+		SELECTED:{{selCarUseRep}}
+		<select ng-model="selCarObj" ng-options="x for (x,y) in carsObj"></select>SELECTED:{{selCarObj}}
+		<select ng-model="selCarComplex" ng-options="y.type+' '+y.name+' '+y.color for (x,y) in carsComplex"></select>SELECTED:{{selCarComplex}}
 	</div>
 	
 	<div ng-controller="httpCtrl">

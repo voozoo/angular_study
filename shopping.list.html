@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="shopping.list">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopping List</title>
+<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="shopping.list.js"></script>
+<link rel="stylesheet" type="text/css" href="w3.css" />
+</head>
+<body ng-controller="main.controller">
+	<header class="w3-container w3-teal">
+		<h1>Shopping List</h1>
+	</header>
+
+	<ul class="w3-ul w3-card">
+		<li ng-repeat="item in itemList">{{item}}<span class="w3-closebtn w3-margin-right w3-medium" ng-click="removeItem($index)">x</span></li>
+	</ul>
+	<div class="w3-row w3-margin-top">
+		<div class="w3-col s10">
+			<input type="text" class="w3-input w3-border" placeholder="Input item to add the shopping list" ng-model="item" />
+		</div>
+		<div class="w3-col s2">
+			<input type="button" value="ADD" class="w3-btn-block w3-teal w3-large" ng-click="addItem(item)" />
+		</div>
+	</div>
+	<div class="w3-container w3-orange" ng-bind="errorText" ng-show="errorText"></div>
+</body>
+</html>

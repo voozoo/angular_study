@@ -32,7 +32,7 @@ app.controller("srvCtl", function($scope, $location, $http, $timeout, $interval,
 		$scope.resHTML = response.data;
 		$scope.resStatus = response.status;
 		$scope.resText = response.statusText;
-	}, function(response){
+	}, function(response) {
 		$scope.resHTML = response.data;
 		$scope.resStatus = response.status;
 		$scope.resText = response.statusText;
@@ -46,14 +46,63 @@ app.controller("srvCtl", function($scope, $location, $http, $timeout, $interval,
 	$scope.hexOut = hexUtil.toHex(255);
 });
 
-app.controller("httpCtrl", function($scope, $http){
-	$http.get("customers.json").then(function(response){
+app.controller("httpCtrl", function($scope, $http) {
+	$http.get("customers.json").then(function(response) {
 		$scope.customers = response.data.records;
 	});
 });
 
 app.controller("optCtrl", function($scope) {
-	$scope.fooNames = ["Tom", "Cat", "Jack"];
+	$scope.fooNames = [ "Tom", "Cat", "Jack" ];
+	$scope.cars = [ {
+		model : "BMW X1",
+		color : "White"
+	}, {
+		model : "BMW X5",
+		color : "Black"
+	}, {
+		model : "XiaLi",
+		color : "Red"
+	} ];
+	$scope.carsObj = {
+		car01 : "c01",
+		car02 : "c02",
+		car03 : "c03"
+	};
+	$scope.carsComplex = {
+		car01 : {
+			type : "A",
+			name : "BMW X1",
+			color : "RED"
+		},
+		car02 : {
+			type : "B",
+			name : "BMW X2",
+			color : "BLUE"
+		},
+		car03 : {
+			type : "C",
+			name : "XiaLi",
+			color : "YELLOW"
+		}
+	};
+});
+
+app.controller("eventCtrl", function($scope) {
+	$scope.mousemoveCount = 0;
+
+	$scope.coord = {
+		x : 0,
+		y : 0
+	};
+	$scope.myClickEvent = function(ev) {
+		$scope.coord.x = ev.clientX;
+		$scope.coord.y = ev.clientY;
+	};
+});
+
+app.controller("validationCtrl", function($scope){
+	
 });
 
 app.filter("myLangFlt", function() {
