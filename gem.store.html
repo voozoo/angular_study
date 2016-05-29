@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="gem.store">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>珠宝商店</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container" ng-controller="StoreController as store">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="product in store.products" ng-hide="product.soldOut">
+				<h3>
+					{{product.name}} <em class="pull-right">{{product.price | currency : "￥"}}</em>
+				</h3> <img alt="{{product.images[0]}}" width="100%" ng-src="{{'images/' + product.images[0]}}" />
+				<section ng-controller="PanelController as panel">
+					<ul class="nav nav-tabs">
+						<li ng-class="{active : panel.isSelected(1)}"><a href="" ng-click="panel.selectTab(1)">描述</a></li>
+						<li ng-class="{active : panel.isSelected(2)}"><a href="" ng-click="panel.selectTab(2)">支付方式</a></li>
+						<li ng-class="{active : panel.isSelected(3)}"><a href="" ng-click="panel.selectTab(3)">评论</a></li>
+					</ul>
+					<div class="panel panel-default" ng-show="panel.isSelected(1)">
+						<p>{{product.description}}</p>
+					</div>
+					<div class="panel panel-default" ng-show="panel.isSelected(2)">
+						<p>
+						<ul>
+							<li ng-repeat="way in product.payWays">{{way}}</li>
+						</ul>
+						</p>
+					</div>
+					<div class="panel panel-default" ng-show="panel.isSelected(3)">
+						<blockquote ng-repeat="review in product.reviews">
+							<p>
+								<b>{{review.star}}★</b>
+							</p>
+							<p>{{review.content}}</p>
+							<cite>{{review.author}}</cite>
+						</blockquote>
+						<section>
+							<h4>留下你的评论：</h4>
+							<form name="reviewForm">
+								<blockquote>
+									<p>
+										<b>{{review.star}}★</b>
+									</p>
+									<p>{{review.content}}</p>
+									<cite>{{review.author}}</cite>
+								</blockquote>
+								<select class="form-control" ng-model="review.star">
+									<option value="1">1★</option>
+									<option value="2">2★</option>
+									<option value="3">3★</option>
+									<option value="4">4★</option>
+									<option value="5">5★</option>
+								</select>
+								<textarea class="form-control" rows="3" cols="10" placeholder="在这里输入评论内容。。。" ng-model="review.content"></textarea>
+								<input type="emial" class="form-control" placeholder="留下你的邮箱" ng-model="review.author" /> <input type="submit" class="btn btn-default" value="添加评论" />
+							</form>
+						</section>
+					</div>
+				</section>
+				<button ng-disabled="!product.canPurchase">加入购入车</button>
+			</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="angular.js"></script>
+	<script type="text/javascript" src="gem.store.js"></script>
+</body>
+</html>
